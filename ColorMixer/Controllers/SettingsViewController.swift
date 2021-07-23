@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class SettingsViewController: UIViewController {
     
     @IBOutlet weak var coloredView: UIView!
     @IBOutlet weak var redSlider: UISlider!
@@ -21,6 +21,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         coloredView.layer.cornerRadius = 10
+        navigationController?.isNavigationBarHidden = true
+        updateColors()
     }
 
     @IBAction func sliderValueChanged() {
@@ -40,4 +42,5 @@ class ViewController: UIViewController {
     }
     
 }
+
 
