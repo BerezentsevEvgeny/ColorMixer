@@ -7,6 +7,10 @@
 
 import UIKit
 
+//protocol SettingsViewControllerDelegate {
+//    func setViewColor(with color:)
+//}
+
 class SettingsViewController: UIViewController {
     
     @IBOutlet weak var coloredView: UIView!
@@ -22,24 +26,33 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         coloredView.layer.cornerRadius = 10
         navigationController?.isNavigationBarHidden = true
-        updateColors()
+        setColor()
+        updateSliderValues()
     }
 
     @IBAction func sliderValueChanged() {
-        updateColors()
+        updateSliderValues()
+        setColor()
     }
     
-    private func updateColors() {
-        let red = CGFloat(redSlider.value)
-        let green = CGFloat(greenSlider.value)
-        let blue = CGFloat(blueSlider.value)
-        
-        redSliderValue.text = String(round(redSlider.value * 100) / 100)
-        greenSliderValue.text = String(round(greenSlider.value * 100) / 100)
-        blueSliderValue.text = String(round(blueSlider.value * 100) / 100)
-        
-        coloredView.backgroundColor = UIColor(red: red, green: green, blue: blue, alpha: 1)
+    private func updateSliderValues() {
+        redSliderValue.text = string(from: redSlider)
+        greenSliderValue.text = string(from: greenSlider)
+        blueSliderValue.text = string(from: blueSlider)
     }
+    
+    private func string(from slider: UISlider) -> String {
+        String(format: "%.2f", slider.value)
+    }
+    
+    private func setColor() {
+        coloredView.backgroundColor = UIColor(red: CGFloat(redSlider.value),
+                                              green: CGFloat(greenSlider.value),
+                                              blue: CGFloat(blueSlider.value),
+                                              alpha: 1)
+    }
+    
+
     
 }
 
